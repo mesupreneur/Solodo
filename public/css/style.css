@@ -1,0 +1,9 @@
+/* Navbar */
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.nav-link {
+    color: #222222 !important;
+}

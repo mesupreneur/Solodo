@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solodo</title>
+</head>
+<body>
+     <h3>Edit Your Listing</h3>
+    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+        <input type="text" name="listing[title]" value="<%= listing.title %>">
+        <br><br>
+        <textarea name="listing[description]"><%= listing.description %></textarea>
+        <br><br>
+        <input type="text" name="listing[image]" value="<%= listing.image %>">
+        <br><br>
+        <input type="number" name="listing[price]" value="<%= listing.price %>">
+        <br><br>
+        <input type="text" name="listing[location]" value="<%= listing.location %>">
+        <br><br>
+        <input type="text" name="listing[techstack]" value="<%= listing.techstack %>">
+        <br><br>
+        <input type="number" name="listing[revenue]" value="<%= listing.revenue %>">
+        <br><br>
+        <input type="number" name="listing[users]" value="<%= listing.users %>">
+        <br><br>
+        <input type="text" name="listing[reason]" value="<%= listing.reason %>">
+        <br><br>
+        <input type="text" name="listing[demolink]" value="<%= listing.demolink %>">
+        <br><br>
+        <input type="text" name="listing[linkedin]" value="<%= listing.linkedin %>">
+        <br><br>
+        <input type="text" name="listing[github]" value="<%= listing.github %>">
+        <br><br>
+        <button>Edit</button>
+    </form>
+    
+</body>
+</html>

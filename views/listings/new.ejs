@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solodo</title>
+</head>
+<body>
+    <h3>Create a New Listing</h3>
+    <form method="POST" action="/listings">
+        <input type="text" name="listing[title]" placeholder="Enter Title">
+        <br><br>
+        <textarea name="listing[description]" placeholder="Enter Description"></textarea>
+        <br><br>
+        <input type="text" name="listing[image]" placeholder="Enter Image Url">
+        <br><br>
+        <input type="number" name="listing[price]" placeholder="Enter Price">
+        <br><br>
+        <input type="text" name="listing[location]" placeholder="Enter Location">
+        <br><br>
+        <input type="text" name="listing[techstack]" placeholder="Enter TechStack">
+        <br><br>
+        <input type="number" name="listing[revenue]" placeholder="Enter Revenue">
+        <br><br>
+        <input type="number" name="listing[users]" placeholder="Enter Users">
+        <br><br>
+        <input type="text" name="listing[reason]" placeholder="Enter Reason">
+        <br><br>
+        <input type="text" name="listing[demolink]" placeholder="Enter Demolink">
+        <br><br>
+        <input type="text" name="listing[linkedin]" placeholder="Enter Linkedin Link">
+        <br><br>
+        <input type="text" name="listing[github]" placeholder="Enter Github Link">
+        <br><br>
+        <button>Add</button>
+    </form>
+    
+</body>
+</html>
