@@ -7,3 +7,44 @@
 .nav-link {
     color: #222222 !important;
 }
+
+/* Footer */
+.f-info-links a {
+    text-decoration: none;
+    color: white;
+
+}
+
+.f-info-links a:hover {
+    color: #8C52FF;
+
+}
+
+.f-info-links {
+    width: 100%;
+}
+
+.f-info-socials, .f-info-brand {
+    width: 100%;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}
+
+.f-info-socials a {
+    color: white;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #090613;
+    display: flex;
+    color: white;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
