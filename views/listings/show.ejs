@@ -1,5 +1,4 @@
 <% layout("layouts/boilerplate") %>
-<body>
   <div class="container py-5">
     <div class="text-center mb-5">
       <h1 class="display-5 fw-bold">🚀 <%= listing.title %></h1>
@@ -40,12 +39,100 @@
       </div>
     </div>
 
-    <div class="d-flex justify-content-center gap-3">
-      <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark px-4"><i class="bi bi-pencil-square"></i> Edit</a>
+    <% if(currentUser && listing.owner && listing.owner._id.equals(currentUser._id)) { %>
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark px-4"><i class="bi bi-pencil-square"></i> Edit</a>
+      
+        <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" onsubmit="return confirm('Are you sure you want to delete this listing?');">
+          <button class="btn btn-outline-danger px-4"><i class="bi bi-trash"></i> Delete</button>
+        </form>
+      </div>
+    <% } %>
 
-      <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" onsubmit="return confirm('Are you sure you want to delete this listing?');">
-        <button class="btn btn-outline-danger px-4"><i class="bi bi-trash"></i> Delete</button>
-      </form>
+    <div class="col-lg-8 mx-auto mt-5">
+
+      <!-- Leave a Review -->
+      <h3 class="fw-bold mb-4">Leave a Review</h3>
+      <div class="card border-0 shadow-lg rounded-4 mb-5">
+        <div class="card-body p-4">
+          <form action="/listings/<%= listing._id %>/reviews" method="POST" class="needs-validation" novalidate>
+            <!-- Star Rating -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Your Rating</label>
+              <div class="star-rating d-flex flex-row-reverse justify-content-start">
+                <% for (let i = 5; i >= 1; i--) { %>
+                  <input type="radio" name="review[rating]" id="star<%= i %>" value="<%= i %>" required />
+                  <label for="star<%= i %>" title="<%= i %> stars">&#9733;</label>
+                <% } %>
+              </div>
+            </div>
+    
+            <!-- Comment -->
+            <div class="mb-4">
+              <label for="comment" class="form-label fw-semibold">Your Comment</label>
+              <textarea name="review[comment]" id="comment" class="form-control rounded-4 p-3" rows="4" placeholder="What did you like or dislike?" required></textarea>
+              <div class="invalid-feedback">Please write a review comment.</div>
+            </div>
+    
+            <!-- Submit -->
+            <button type="submit" class="btn btn-dark px-4 rounded-pill"><i class="bi bi-send-fill me-1"></i>Submit Review</button>
+          </form>
+        </div>
+      </div>
+    
+      <!-- All Reviews -->
+      <h3 class="fw-bold mb-4">All Reviews</h3>
+      <% if (listing.reviews.length === 0) { %>
+        <p class="text-muted">No reviews yet. Be the first to leave one!</p>
+      <% } else { %>
+        <div class="list-group">
+          <% for (let review of listing.reviews) { %>
+            <div class="list-group-item border-0 shadow-sm rounded-4 p-4 mb-3">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="text-warning fs-5">
+                  <% for (let i = 1; i <= review.rating; i++) { %>
+                    &#9733;
+                  <% } %>
+                  <% for (let i = review.rating + 1; i <= 5; i++) { %>
+                    <span class="text-muted">&#9733;</span>
+                  <% } %>
+                </div>
+                <small class="text-muted"><%= new Date(review.createdAt).toLocaleDateString("en-GB") %></small>
+              </div>
+              <p class="mb-0 text-muted"><%= review.comment %></p>
+              <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST" class="mb-3">
+                <button class="btn btn-outline-danger btn-sm">Delete</button>
+              </form>
+            </div>
+          <% } %>
+        </div>
+      <% } %>
+    
     </div>
+    
+    <!-- Custom Star Rating CSS -->
+    <style>
+      .star-rating input {
+        display: none;
+      }
+    
+      .star-rating label {
+        font-size: 2rem;
+        color: #ccc;
+        cursor: pointer;
+        transition: color 0.2s ease;
+        margin-right: 4px;
+      }
+    
+      .star-rating input:checked ~ label,
+      .star-rating label:hover,
+      .star-rating label:hover ~ label {
+        color: #f9a825;
+      }
+    
+      .star-rating input:checked + label ~ label {
+        color: #ccc;
+      }
+    </style>
+    
   </div>
-</body>
