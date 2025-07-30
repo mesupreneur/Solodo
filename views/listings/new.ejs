@@ -1,39 +1,121 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solodo</title>
-</head>
+<% layout("layouts/boilerplate") %>
 <body>
-    <h3>Create a New Listing</h3>
-    <form method="POST" action="/listings">
-        <input type="text" name="listing[title]" placeholder="Enter Title">
-        <br><br>
-        <textarea name="listing[description]" placeholder="Enter Description"></textarea>
-        <br><br>
-        <input type="text" name="listing[image]" placeholder="Enter Image Url">
-        <br><br>
-        <input type="number" name="listing[price]" placeholder="Enter Price">
-        <br><br>
-        <input type="text" name="listing[location]" placeholder="Enter Location">
-        <br><br>
-        <input type="text" name="listing[techstack]" placeholder="Enter TechStack">
-        <br><br>
-        <input type="number" name="listing[revenue]" placeholder="Enter Revenue">
-        <br><br>
-        <input type="number" name="listing[users]" placeholder="Enter Users">
-        <br><br>
-        <input type="text" name="listing[reason]" placeholder="Enter Reason">
-        <br><br>
-        <input type="text" name="listing[demolink]" placeholder="Enter Demolink">
-        <br><br>
-        <input type="text" name="listing[linkedin]" placeholder="Enter Linkedin Link">
-        <br><br>
-        <input type="text" name="listing[github]" placeholder="Enter Github Link">
-        <br><br>
-        <button>Add</button>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h1 class="fw-bold display-5">Create a New Listing</h1>
+      <p class="text-muted fs-5">Share your startup with buyers ready to help it scale. Fill out the details below.</p>
+    </div>
+
+    <form method="POST" action="/listings" class="mx-auto needs-validation" style="max-width: 850px;" novalidate>
+      <!-- Product Info -->
+      <div class="card shadow-sm border-0 rounded-4 p-4 mb-4">
+        <h5 class="mb-4 fw-bold"><i class="bi bi-box-seam"></i> Product Information</h5>
+        
+        <div class="mb-3">
+          <label for="title" class="form-label">Product Name</label>
+          <input type="text" name="listing[title]" class="form-control" required placeholder="e.g. TaskGenie - AI productivity tracker">
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Please enter a product name.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea name="listing[description]" rows="4" class="form-control" required placeholder="Briefly describe your product..."></textarea>
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Please provide a description.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="image" class="form-label">Image URL</label>
+          <input type="text" name="listing[image]" class="form-control" placeholder="Paste your product screenshot or logo URL">
+          <div class="valid-feedback">Optional, but looks good!</div>
+          <div class="invalid-feedback">Invalid image URL.</div>
+        </div>
+      </div>
+
+      <!-- Financials & Metrics -->
+      <div class="card shadow-sm border-0 rounded-4 p-4 mb-4">
+        <h5 class="mb-4 fw-bold"><i class="bi bi-bar-chart"></i> Business Metrics</h5>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <label for="price" class="form-label">Asking Price (₨)</label>
+            <input type="number" name="listing[price]" class="form-control" required placeholder="e.g. 500000">
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please enter the asking price.</div>
+          </div>
+
+          <div class="col-md-4">
+            <label for="revenue" class="form-label">TTM Revenue (₨)</label>
+            <input type="number" name="listing[revenue]" class="form-control" required placeholder="Last 12 months">
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please provide the last 12 months revenue.</div>
+          </div>
+
+          <div class="col-md-4">
+            <label for="users" class="form-label">Total Users</label>
+            <input type="number" name="listing[users]" class="form-control" required placeholder="e.g. 2500">
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">Please enter total user count.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Technical & Ownership -->
+      <div class="card shadow-sm border-0 rounded-4 p-4 mb-4">
+        <h5 class="mb-4 fw-bold"><i class="bi bi-code-slash"></i> Tech & Ownership</h5>
+
+        <div class="mb-3">
+          <label for="techstack" class="form-label">Tech Stack</label>
+          <input type="text" name="listing[techstack]" class="form-control" required placeholder="e.g. React, Node.js, MongoDB">
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Please enter the tech stack used.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="reason" class="form-label">Reason for Selling</label>
+          <input type="text" name="listing[reason]" class="form-control" required placeholder="Why are you selling this project?">
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Please provide a reason for selling.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input type="text" name="listing[location]" class="form-control" required placeholder="Where are you based?">
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Please enter your location.</div>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="card shadow-sm border-0 rounded-4 p-4 mb-4">
+        <h5 class="mb-4 fw-bold"><i class="bi bi-link-45deg"></i> Useful Links</h5>
+
+        <div class="mb-3">
+          <label for="demolink" class="form-label">Demo URL</label>
+          <input type="text" name="listing[demolink]" class="form-control" required placeholder="e.g. https://demo.yourstartup.com">
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Please provide the demo URL.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="linkedin" class="form-label">LinkedIn (Founder)</label>
+          <input type="text" name="listing[linkedin]" class="form-control" required placeholder="e.g. https://linkedin.com/in/yourname">
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Please provide your LinkedIn profile.</div>
+        </div>
+
+        <div class="mb-3">
+          <label for="github" class="form-label">GitHub Repo</label>
+          <input type="text" name="listing[github]" class="form-control" required placeholder="e.g. https://github.com/yourproject">
+          <div class="valid-feedback">Looks good!</div>
+          <div class="invalid-feedback">Please provide a valid GitHub repo link.</div>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-dark btn-lg px-5 rounded-pill"><i class="bi bi-plus-circle"></i> Submit Listing</button>
+      </div>
     </form>
-    
+  </div>
 </body>
-</html>

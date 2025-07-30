@@ -1,23 +1,51 @@
-<% layout("/layouts/boilerplate") %>
+<% layout("layouts/boilerplate") %>
 <body>
-    <h3>Listing Details: </h3>
-    <ul>
-        <li><%= listing.title %></li>
-        <li><%= listing.description %></li>
-        <li>&#8360 <%= listing.price.toLocaleString("en-NP") %></li>
-        <li><%= listing.location %></li>
-        <li><%= listing.techstack %></li>
-        <li>&#8360 <%= listing.revenue.toLocaleString("en-NP") %></li>
-        <li><%= listing.users %></li>
-        <li><%= listing.reason %></li>
-        <li><%= listing.demolink %></li>
-        <li><%= listing.linkedin %></li>
-        <li><%= listing.github %></li>    
-    </ul>
-    <br>
-    <a href="/listings/<%= listing._id %>/edit">Edit this Listing</a>
-    <br><br>
-    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE">
-        <button>Delete this listing</button>
-    </form>
+  <div class="container py-5">
+    <div class="text-center mb-5">
+      <h1 class="display-5 fw-bold">🚀 <%= listing.title %></h1>
+      <p class="lead text-muted">Built by a solopreneur. Ready to grow with the right buyer.</p>
+    </div>
+
+    <div class="card shadow-lg border-0 rounded-4 mb-5 mx-auto" style="max-width: 850px;">
+      <img src="<%= listing.image %>" class="card-img-top rounded-top-4 object-fit-cover" style="height: 350px;" alt="Listing Image">
+
+      <div class="card-body px-5 py-4">
+        <h4 class="card-title mb-3"><i class="bi bi-info-circle"></i> About the Project</h4>
+        <p class="card-text text-muted fs-5 mb-4"><%= listing.description %></p>
+
+        <div class="row g-4 mb-4">
+          <div class="col-md-6">
+            <p><i class="bi bi-geo-alt-fill text-primary"></i> <strong>Location:</strong> <%= listing.location %></p>
+            <p><i class="bi bi-code-slash text-danger"></i> <strong>Tech Stack:</strong> <%= listing.techstack %></p>
+            <p><i class="bi bi-cash-coin text-success"></i> <strong>Revenue:</strong> NPR <%= listing.revenue.toLocaleString("en-NP") %></p>
+          </div>
+          <div class="col-md-6">
+            <p><i class="bi bi-person-circle text-secondary"></i> <strong>Users:</strong> <%= listing.users %></p>
+            <p><i class="bi bi-lightbulb text-warning"></i> <strong>Reason for Selling:</strong> <%= listing.reason %></p>
+            <p><i class="bi bi-tags text-dark"></i> <strong>Price:</strong> NPR <%= listing.price.toLocaleString("en-NP") %></p>
+          </div>
+        </div>
+
+        <div class="d-flex flex-wrap gap-3">
+          <% if (listing.demolink) { %>
+            <a href="<%= listing.demolink %>" target="_blank" class="btn btn-outline-dark"><i class="bi bi-box-arrow-up-right"></i> Demo</a>
+          <% } %>
+          <% if (listing.linkedin) { %>
+            <a href="<%= listing.linkedin %>" target="_blank" class="btn btn-outline-dark"><i class="bi bi-linkedin"></i> Founder</a>
+          <% } %>
+          <% if (listing.github) { %>
+            <a href="<%= listing.github %>" target="_blank" class="btn btn-outline-dark"><i class="bi bi-github"></i> GitHub</a>
+          <% } %>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-center gap-3">
+      <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark px-4"><i class="bi bi-pencil-square"></i> Edit</a>
+
+      <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" onsubmit="return confirm('Are you sure you want to delete this listing?');">
+        <button class="btn btn-outline-danger px-4"><i class="bi bi-trash"></i> Delete</button>
+      </form>
+    </div>
+  </div>
 </body>
